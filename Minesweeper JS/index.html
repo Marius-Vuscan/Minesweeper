@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Minesweeper</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="Minesweeper">
+		<p id="titleM">Minesweeper</p>
+		<div id="MinesweeperContent">
+			<input class="MinesweeperDifficulty" id="MBeginner" value="Beginner" type="button" name="">
+			<p class="txt">10x10x10</p>
+			<input class="MinesweeperDifficulty" id="MIntermediate" value="Intermediate" type="button" name="">
+			<p class="txt">16x16x40</p>
+			<input class="MinesweeperDifficulty" id="MExpert" value="Expert" type="button" name="">
+			<p class="txt">16x30x100</p>
+		</div>
+		<div class="container"></div>
+		<div class="bar">
+			<ul id="minesweeperBar">
+				<li id="timer"></li>
+				<li id="mineScore"><p class="txt"></p></li>
+				<li><br><input id="newGameMS" class="txt" type="button" value="New Game" name=""></li>
+				<li id="crms">COPYRIGHT Marius Vușcan - 2018</li>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
