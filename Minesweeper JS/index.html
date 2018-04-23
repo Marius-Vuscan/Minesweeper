@@ -2,29 +2,33 @@
 <html>
 <head>
 	<title>Minesweeper</title>
+	<link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 	<div class="Minesweeper">
-		<p id="titleM">Minesweeper</p>
-		<div id="MinesweeperContent">
-			<input class="MinesweeperDifficulty" id="MBeginner" value="Beginner" type="button" name="">
-			<p class="txt">10x10x10</p>
-			<input class="MinesweeperDifficulty" id="MIntermediate" value="Intermediate" type="button" name="">
-			<p class="txt">16x16x40</p>
-			<input class="MinesweeperDifficulty" id="MExpert" value="Expert" type="button" name="">
-			<p class="txt">16x30x100</p>
+		<p class ="Mfont" id="titleM">Minesweeper</p>
+		<div class ="Mfont" id="MinesweeperContent">
+			<input class="Mfont MinesweeperDifficulty" id="MBeginner" value="Beginner" type="button" name="">
+			<p class="Mfont txt">10x10x10</p>
+			<input class="Mfont MinesweeperDifficulty" id="MIntermediate" value="Intermediate" type="button" name="">
+			<p class="Mfont txt">16x16x40</p>
+			<input class="Mfont MinesweeperDifficulty" id="MExpert" value="Expert" type="button" name="">
+			<p class="Mfont txt">16x30x100</p>
 		</div>
 		<div class="container"></div>
 		<div class="bar">
 			<ul id="minesweeperBar">
-				<li id="timer"></li>
-				<li id="mineScore"><p class="txt"></p></li>
-				<li><br><input id="newGameMS" class="txt" type="button" value="New Game" name=""></li>
-				<li id="crms">COPYRIGHT Marius Vușcan - 2018</li>
+				<li class ="Mfont" id="timer"></li>
+				<li class ="Mfont" id="mineScore"><p class="txt"></p></li>
+				<li><br><input id="newGameMS" class="Mfont txt" type="button" value="New Game" name=""></li>
+				<li id="crms"><i id="Micon" class="fas fa-bomb" onclick="Micon()"></i></li>
 			</ul>
 		</div>
+
 	</div>
+
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 </body>

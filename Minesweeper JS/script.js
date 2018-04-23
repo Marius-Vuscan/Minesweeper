@@ -1,3 +1,4 @@
+function Micon(){alert("Game creator: Marius Vuscan")};
 $(".container").hide();
 $("#timer").hide();
 $("#mineScore").hide();
