@@ -68,7 +68,6 @@ function game()//game function set the size and number of inputs and number of m
 	}
 
 	//initializate some variables
-	var $elements = [];
 	var bool=[];
 	var nrFound=0;
 	var nr=0;
@@ -84,35 +83,40 @@ function game()//game function set the size and number of inputs and number of m
 	}
 
 	//create dynamically buttons
+	var elements=[];
 	for (i = 0; i < n; i++)
 	{
 		for(j=0;j<m;j++)
 		{
-	    	$elements.push($('<input>', {type:"button", val:i+","+j}));
+				var input = document.createElement("input");
+				input.type = "button";
+	    	elements.push(input);
 	    	bool.push(false);
 		}
 	}
-	$(".container").append($elements);
+	$(".container").append(elements);
+
+	//add class "buttonClass"
+	for(i=0;i<elements.length;i++)
+		elements[i].classList.add("buttonClass");
 
 	//add bombs
 	for(i=0;i<min;i++)
-	{
-		$elements[i].attr('value', "*");
-	}
+		elements[i].value="*";
 
 	//shuffle
 	function Shuffle()
 	{
-	    for (i = 0; i < $elements.length; i++)
+	    for (i = 0; i < elements.length; i++)
 	    {
-	        var j =i + Math.floor((Math.random() * $elements.length) -i);
-	        var aux = $elements[j].attr('value');
-	        $elements[j].attr('value',$elements[i].attr('value'));
-	        $elements[i].attr('value',aux);
+	        var j =i + Math.floor((Math.random() * elements.length) -i);
+	        var aux = elements[j].value;
+	        elements[j].value=elements[i].value;
+	        elements[i].value=aux;
 
-	        var aux2 = $elements[j].attr('name');
-	        $elements[j].attr('name',$elements[i].attr('name'));
-	        $elements[i].attr('name',aux2);
+	        var aux2 = elements[j].name;
+	        elements[j].name=elements[i].name;
+	        elements[i].name=aux2;
 	    }
 	}
 	Shuffle();
@@ -120,35 +124,29 @@ function game()//game function set the size and number of inputs and number of m
 	//add numbers around the mines
 	for(i=0;i<n*m;i++)
 	{
-		if($elements[i].attr('value')!="*")
+		if(elements[i].value!="*")
 		{
 			var pe=0;
-			if (i+1 < $elements.length && i%m!=(m-1) && $elements[i+1].attr('value')==="*") pe++;
-			if (i-1 >= 0 && i%m!=0 && $elements[i-1].attr('value')==="*") pe++;
-			if (i-m >= 0 && $elements[i-m].attr('value')==="*") pe++;
-			if (i+m < $elements.length && $elements[i+m].attr('value')==="*") pe++;
-			if (i-(m+1) >= 0 && i%m!=0 && $elements[i-(m+1)].attr('value')==="*") pe++;
-			if (i+(m+1) < $elements.length && i%m!=(m-1) && $elements[i+(m+1)].attr('value')==="*") pe++;
-			if (i-(m-1) >= 0 && i%m!=(m-1) && $elements[i-(m-1)].attr('value')==="*") pe++;
-			if (i+(m-1) < $elements.length && i%m!=0 && $elements[i+(m-1)].attr('value')==="*") pe++;
+			if (i+1 < elements.length && i%m!=(m-1) && elements[i+1].value==="*") pe++;
+			if (i-1 >= 0 && i%m!=0 && elements[i-1].value==="*") pe++;
+			if (i-m >= 0 && elements[i-m].value==="*") pe++;
+			if (i+m < elements.length && elements[i+m].value==="*") pe++;
+			if (i-(m+1) >= 0 && i%m!=0 && elements[i-(m+1)].value==="*") pe++;
+			if (i+(m+1) < elements.length && i%m!=(m-1) && elements[i+(m+1)].value==="*") pe++;
+			if (i-(m-1) >= 0 && i%m!=(m-1) && elements[i-(m-1)].value==="*") pe++;
+			if (i+(m-1) < elements.length && i%m!=0 && elements[i+(m-1)].value==="*") pe++;
 
 			if(pe===0)
 			{
-				$elements[i].attr('value'," ");
+				elements[i].value=" ";
 			}
 			else
 			{
 				nr++;
-				$elements[i].attr('value',pe);
+				elements[i].value=pe;
 			}
 		}
 	}
-
-	//add to all $elements class "buttonClass"
-	for(i=0;i<n*m;i++)
-		$elements[i].addClass( "buttonClass" );
-
-	const elements = document.querySelectorAll('.buttonClass');
 
 	//foreach elements i set event click and right click (contextmenu)
 	elements.forEach((element, key) => {
