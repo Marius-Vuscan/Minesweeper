@@ -1,9 +1,11 @@
 function Micon(){alert("Game creator: Marius Vuscan")};
+//on game start
 $(".container").hide();
 $("#timer").hide();
 $("#mineScore").hide();
 $("#newGameMS").hide();
-function hideAndShow()
+
+function hideAndShow()//show intputs[type="button"] array and hide menu items
 {
 	$(".container").show();
 	$("#timer").show();
@@ -14,6 +16,8 @@ function hideAndShow()
 	$("#MinesweeperContent").hide();
 	game();
 }
+
+// select difficulty level
 $("#MBeginner").click(function(){
 	buttonCheck=1;
 	hideAndShow();
@@ -26,7 +30,8 @@ $("#MExpert").click(function(){
 	buttonCheck=3;
 	hideAndShow();
 });
-function game()
+
+function game()//game function set the size and number of inputs and number of mines
 {
 	switch(buttonCheck)
 	{
@@ -61,11 +66,15 @@ function game()
 			break;
 		}
 	}
+
+	//initializate some variables
 	var $elements = [];
 	var bool=[];
 	var nrFound=0;
 	var nr=0;
 	var k=0;
+
+	//timer
 	$("#timer").text("Time: " + k);
 	var timer1=setInterval(myTimer ,1000);
 	function myTimer()
@@ -73,7 +82,9 @@ function game()
 		k++;
 		$("#timer").text("Time: " + k);
 	}
-	for (i = 0; i < n; i++) 
+
+	//create dynamically buttons
+	for (i = 0; i < n; i++)
 	{
 		for(j=0;j<m;j++)
 		{
@@ -91,14 +102,14 @@ function game()
 
 	//shuffle
 	function Shuffle()
-	{        
+	{
 	    for (i = 0; i < $elements.length; i++)
 	    {
 	        var j =i + Math.floor((Math.random() * $elements.length) -i);
 	        var aux = $elements[j].attr('value');
 	        $elements[j].attr('value',$elements[i].attr('value'));
 	        $elements[i].attr('value',aux);
-	        
+
 	        var aux2 = $elements[j].attr('name');
 	        $elements[j].attr('name',$elements[i].attr('name'));
 	        $elements[i].attr('name',aux2);
@@ -122,7 +133,7 @@ function game()
 			if (i+(m-1) < $elements.length && i%m!=0 && $elements[i+(m-1)].attr('value')==="*") pe++;
 
 			if(pe===0)
-			{	
+			{
 				$elements[i].attr('value'," ");
 			}
 			else
@@ -132,11 +143,14 @@ function game()
 			}
 		}
 	}
+
+	//add to all $elements class "buttonClass"
 	for(i=0;i<n*m;i++)
-		$elements[i].addClass( "clasa_pe_buton" );
+		$elements[i].addClass( "buttonClass" );
 
-	const elements = document.querySelectorAll('.clasa_pe_buton');
+	const elements = document.querySelectorAll('.buttonClass');
 
+	//foreach elements i set event click and right click (contextmenu)
 	elements.forEach((element, key) => {
 			element.addEventListener('click', () => {
 				if(elements[key].style.backgroundColor!="yellow")
@@ -160,7 +174,7 @@ function game()
 			}, false);
 	})
 
-	function newGame()
+	function newGame()//newGame function takes us back to the main page
 	{
 		$(".container").empty();
 		$(".container").hide();
@@ -179,8 +193,11 @@ function game()
 	$("#newGameMS").click(function(){
 		newGame();
 	});
+
+	//score
 	var tryMine=min;
 	$("#mineScore").text("Mines: " + tryMine);
+
 	var minesFound=0;
 	var aux;
 	var elementsDuplicate=[];
@@ -188,7 +205,8 @@ function game()
 	{
 		elementsDuplicate[i]=elements[i].value;
 	}
-	function rightClick(element,key)
+
+	function rightClick(element,key)//right click
 	{
 		if(elements[key].style.backgroundColor != "yellow" && elements[key].style.backgroundColor != "white")
 		{
@@ -217,14 +235,15 @@ function game()
 		}
 		$("#mineScore").text("Mines: " + tryMine);
 	}
-	function neg(element,key)
+
+	function neg(element,key)//find neighbors
 	{
 		elements[key].style.backgroundColor = "white";
 		elements[key].classList.add("active");
 		switch(elements[key].value)
 		{
 			case "1": elements[key].style.color = "blue"; break;
-			case "2": elements[key].style.color = "green"; break;	
+			case "2": elements[key].style.color = "green"; break;
 			case "3": elements[key].style.color = "red"; break;
 			case "4": elements[key].style.color = "darkblue"; break;
 			case "5": elements[key].style.color = "darkred"; break;
@@ -232,7 +251,7 @@ function game()
 		}
 		if (elements[key].value===" " && bool[key]===false)
 		{
-			
+
 			bool[key]=true;
 			if(key===0)
 			{
